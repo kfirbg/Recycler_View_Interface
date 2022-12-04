@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     private RecyclerView recycleView;
     private LinearLayoutManager layoutManager;
     private MyAdapter addapter;
-    private ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         recycleView.setItemAnimator(new DefaultItemAnimator());
 
         dataSet = new ArrayList<DataModel>();
-
         for(int i = 0; i< MyData.nameArray.length ; i++)
         {
             dataSet.add(new DataModel(
@@ -44,16 +42,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
                     MyData.shortData[i]
             ));
         }
-        addapter = new MyAdapter(dataSet);
+        addapter = new MyAdapter(dataSet,this);
         recycleView.setAdapter(addapter);
-
-//        imageButton = (ImageButton) findViewById(R.id.imageViewButton)
     }
 
 
     @Override
     public void onItemClick(int pos) {
-        Log.d("msg","main");
+
+        Log.d("msg", String.valueOf(pos));
     }
 
 }

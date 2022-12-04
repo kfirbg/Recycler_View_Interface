@@ -22,17 +22,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ArrayList<DataModel> dataSet;
     private RecyclerViewInterface recyclerViewInterface;
 
-    public MyAdapter(ArrayList<DataModel> dataSet) {
+    public MyAdapter(ArrayList<DataModel> dataSet,RecyclerViewInterface recyclerViewInterface) {
         this.dataSet = dataSet;
         this.recyclerViewInterface = recyclerViewInterface;
     }
-
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext() ).inflate(R.layout.fragment_card_layout2 , parent ,false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view, recyclerViewInterface);
         return myViewHolder;
     }
 
@@ -61,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView textViewShortData;
         ImageView imageViewIcon;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView ,RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.CardView);
             textViewName = ( TextView) itemView.findViewById(R.id.textViewName);
@@ -71,14 +70,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             imageViewIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("msg","Adapter");
-//                    if(recyclerViewInterface != null){
-//                        int position = getAdapterPosition();
-//
-//                        if(position != RecyclerView.NO_POSITION){
-//                            recyclerViewInterface.onItemClick(position);
-//                        }
-
+                    if(recyclerViewInterface != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(position);
+                        }
+                    }
                 }
             });
         }
